@@ -1,0 +1,197 @@
+2024-09-30 08:54:03 - [INFO] - --------------------------------------------------
+2024-09-30 08:54:03 - [INFO] - ORQ 2 PRUEBA TECNICA ORIGINACION COBRANZA
+2024-09-30 08:54:03 - [INFO] - --------------------------------------------------
+2024-09-30 08:54:03 - [INFO] - Guardado logs en: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\logs\20240930_085403_orq_2_prueba_tecnica_originacion_cobranza.log
+2024-09-30 08:54:09 - [INFO] - Versión de Orquestador: 1.3.6
+2024-09-30 08:54:09 - [INFO] - Inicializando Ejecución de Orquestador
+2024-09-30 08:54:09 - [INFO] - Se agregaron 3 consultas al plan de ejecucion
+2024-09-30 08:54:09 - [INFO] - Inicia la ejecucion de la tarea ExtractTransformLoad
+2024-09-30 08:54:09 - [INFO] - ------------------------------------------------
+2024-09-30 08:54:09 - [INFO] - Ejecutando Paso ** ExtractTransformLoad **
+2024-09-30 08:54:09 - [INFO] - Paso ExtractTransformLoad finalizado en 0.0s
+2024-09-30 08:54:09 - [INFO] - Finalizó la ejecucion de la tarea ExtractTransformLoad, duracion: 00:00.0
+2024-09-30 08:54:09 - [INFO] - Inicia la ejecucion de la tarea transformarDatosSQL
+2024-09-30 08:54:09 - [INFO] - ------------------------------------------------
+2024-09-30 08:54:09 - [INFO] - Ejecutando Paso ** transformarDatosSQL **
+2024-09-30 08:54:09 - [INFO] - Iniciando la ejecución de los archivos SQL en la ruta: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/
+2024-09-30 08:54:09 - [INFO] - Ejecutando Directorio: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/
+2024-09-30 08:54:09 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\001_creacion_obligaciones_productos_limpios.sql
+2024-09-30 08:54:09 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-30 08:54:09 - [INFO] - Transcurrido: 1727704449, Tiempo de Refresco = 1000
+2024-09-30 08:54:10 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_productos_limpios;
+2024-09-30 08:54:10 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.5
+2024-09-30 08:54:10 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_productos_limpios AS
+            SELECT oblg.*, 
+                LOWER(
+                    CASE 
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*cartera tota[l]*$', 'i') THEN 'cartera'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*cartera$', 'i') THEN 'cartera'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta de cr[ée]dito$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta de crÃ©dito$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*operacion_especifica$', 'i') THEN 'operacion_especifica'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*sufi$', 'i') THEN 'sufi'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*leasing$', 'i') THEN 'leasing'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*hipotecario$', 'i') THEN 'hipotecario'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*factoring$', 'i') THEN 'factoring'
+                        ELSE TRIM(REGEXP_REPLACE(oblg.id_producto, '^[0-9]+-*\\s*', ''))
+                    END
+                ) AS producto_limpio
+            FROM proceso.prueba_obligaciones_clientes oblg;
+2024-09-30 08:54:12 - [INFO] - Finalizó la ejecucion del query, duracion: 00:01.3
+2024-09-30 08:54:12 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\002_concatenar_columnas_necesarias.sql
+2024-09-30 08:54:12 - [INFO] - Se agregaron 4 consultas al plan de ejecucion
+2024-09-30 08:54:12 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_concatenadas;
+2024-09-30 08:54:12 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.5
+2024-09-30 08:54:12 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_concatenadas AS
+            SELECT 
+                oblg.*, 
+                CONCAT(
+                    CAST(oblg.cod_segm_tasa AS STRING), '-', 
+                    CAST(oblg.cod_subsegm_tasa AS STRING), '-', 
+                    oblg.cal_interna_tasa  
+                ) AS concatenacion_segmento
+            FROM proceso.prueba_obligaciones_productos_limpios oblg;
+2024-09-30 08:54:14 - [INFO] - Finalizó la ejecucion del query, duracion: 00:01.9
+2024-09-30 08:54:14 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_tasas_concatenadas;
+2024-09-30 08:54:15 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.3
+2024-09-30 08:54:15 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_tasas_concatenadas AS
+            SELECT 
+                t.*, 
+                CONCAT(
+                    CAST(t.cod_segmento AS STRING), '-', 
+                    CAST(t.cod_subsegmento AS STRING), '-', 
+                    t.calificacion_riesgos  
+                ) AS concatenacion_segmento_riesgo
+            FROM proceso.prueba_tasas_productos t;
+2024-09-30 08:54:15 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.6
+2024-09-30 08:54:15 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\003_obligaciones_con_tasa.sql
+2024-09-30 08:54:15 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-30 08:54:15 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_con_tasas;
+2024-09-30 08:54:16 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.5
+2024-09-30 08:54:16 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_con_tasas AS
+            SELECT 
+                oblg.num_documento, 
+                oblg.id_producto, 
+                oblg.producto_limpio AS producto, 
+                oblg.cod_segm_tasa,
+                oblg.cod_subsegm_tasa,
+                oblg.cal_interna_tasa,
+                oblg.plazo,
+                oblg.cod_periodicidad,
+                oblg.periodicidad,
+                oblg.valor_inicial,
+                t.concatenacion_segmento_riesgo, 
+                t.segmento,
+                oblg.concatenacion_segmento,
+                CASE 
+                    WHEN oblg.producto_limpio = 'cartera' THEN t.tasa_cartera
+                    WHEN oblg.producto_limpio = 'operacion_especifica' THEN t.tasa_operacion_especifica
+                    WHEN oblg.producto_limpio = 'leasing' THEN t.tasa_leasing
+                    WHEN oblg.producto_limpio = 'tarjeta' THEN t.tasa_tarjeta
+                    WHEN oblg.producto_limpio = 'sufi' THEN t.tasa_sufi
+                    WHEN oblg.producto_limpio = 'factoring' THEN t.tasa_factoring
+                    WHEN oblg.producto_limpio = 'hipotecario' THEN t.tasa_hipotecario
+                    ELSE NULL
+                END AS tasa_aplicada
+            FROM proceso.prueba_obligaciones_concatenadas oblg
+            LEFT JOIN proceso.prueba_tasas_concatenadas t
+            ON oblg.concatenacion_segmento = t.concatenacion_segmento_riesgo;
+2024-09-30 08:54:18 - [INFO] - Finalizó la ejecucion del query, duracion: 00:01.7
+2024-09-30 08:54:18 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\004_obligaciones_tasa_efectiva_y_valorFinal.sql
+2024-09-30 08:54:18 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-30 08:54:18 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_con_valor_final;
+2024-09-30 08:54:18 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.3
+2024-09-30 08:54:18 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_con_valor_final AS
+            SELECT 
+                num_documento,
+                id_producto,
+                producto,
+                cod_segm_tasa,
+                segmento,
+                cod_subsegm_tasa,
+                cal_interna_tasa,
+                valor_inicial,
+                plazo,
+                cod_periodicidad,
+                periodicidad,
+                tasa_aplicada,
+                POWER(1 + tasa_aplicada, 1.0 / (12 / cod_periodicidad)) - 1 AS tasa_efectiva,
+                (POWER(1 + tasa_aplicada, 1.0 / (12 / cod_periodicidad)) - 1) * valor_inicial AS valor_final
+            FROM proceso.prueba_obligaciones_con_tasas;
+2024-09-30 08:54:20 - [INFO] - Finalizó la ejecucion del query, duracion: 00:01.5
+2024-09-30 08:54:20 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\005_agrupacion_productos.sql
+2024-09-30 08:54:20 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-30 08:54:20 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_resumen_clientes;
+2024-09-30 08:54:20 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.5
+2024-09-30 08:54:20 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_resumen_clientes AS
+            SELECT 
+                num_documento,
+                COUNT(DISTINCT id_producto) AS cantidad_productos,
+                SUM(valor_final) AS total_valor_final
+            FROM proceso.prueba_obligaciones_con_valor_final
+            GROUP BY num_documento
+            HAVING COUNT(DISTINCT id_producto) >= 2;
+2024-09-30 08:54:22 - [INFO] - Finalizó la ejecucion del query, duracion: 00:01.4
+2024-09-30 08:54:22 - [INFO] - Directorio ejecutado correctamente, duración(s): 12.77
+2024-09-30 08:54:22 - [INFO] - Ejecución de los SQL en la ruta C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/ finalizada correctamente.
+2024-09-30 08:54:22 - [INFO] - Se agregaron 1 consultas al plan de ejecucion
+2024-09-30 08:54:22 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            SELECT num_documento,
+                                                                                        id_producto,
+                                                                                        producto,
+                                                                                        cod_segm_tasa,
+                                                                                        segmento,
+                                                                                        cod_subsegm_tasa,
+                                                                                        cal_interna_tasa,
+                                                                                        valor_inicial,
+                                                                                        plazo,
+                                                                                        cod_periodicidad,
+                                                                                        periodicidad,
+                                                                                        tasa_aplicada,
+                                                                                        tasa_efectiva,
+                                                                                        valor_final FROM proceso.prueba_obligaciones_con_valor_final
+2024-09-30 08:54:23 - [INFO] - Finaliza obtener_dataframe, duracion: 00:01.6
+2024-09-30 08:54:23 - [INFO] - 2,048 filas, 14 columnas, 00:01.0 consultando, 00:00.4 descargando, 00:00.0 convirtiendo
+2024-09-30 08:54:23 - [INFO] - Se agregaron 1 consultas al plan de ejecucion
+2024-09-30 08:54:23 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            SELECT num_documento, cantidad_productos, total_valor_final
+                                                                              FROM proceso.prueba_obligaciones_resumen_clientes
+2024-09-30 08:54:25 - [INFO] - Finaliza obtener_dataframe, duracion: 00:01.2
+2024-09-30 08:54:25 - [INFO] - 247 filas, 3 columnas, 00:00.8 consultando, 00:00.2 descargando, 00:00.0 convirtiendo
+2024-09-30 08:54:25 - [INFO] - Datos guardados exitosamente en 'obligacionesValorFinalSQL.xlsx'
+2024-09-30 08:54:25 - [INFO] - Datos guardados exitosamente en 'obligacionesResumenClientesSQL.xlsx'
+2024-09-30 08:54:25 - [INFO] - Paso transformarDatosSQL finalizado en 16.44s
+2024-09-30 08:54:25 - [INFO] - Finalizó la ejecucion de la tarea transformarDatosSQL, duracion: 00:16.4
+2024-09-30 08:54:25 - [INFO] - Inicia la ejecucion de la tarea TransformarDatosPython
+2024-09-30 08:54:25 - [INFO] - ------------------------------------------------
+2024-09-30 08:54:25 - [INFO] - Ejecutando Paso ** TransformarDatosPython **
+2024-09-30 08:54:26 - [INFO] - Datos cargados correctamente.
+2024-09-30 08:54:26 - [INFO] - Productos limpios.
+2024-09-30 08:54:26 - [INFO] - Concatenación de segmentos en obligaciones.
+2024-09-30 08:54:26 - [INFO] - Concatenación de segmentos en tasas.
+2024-09-30 08:54:26 - [INFO] - Tasas asignadas.
+2024-09-30 08:54:26 - [INFO] - Tasa efectiva y valor final calculados.
+2024-09-30 08:54:26 - [INFO] - Tabla 'prueba_obligaciones_con_valor_final' guardada correctamente.
+2024-09-30 08:54:26 - [INFO] - Resumen por cliente calculado.
+2024-09-30 08:54:26 - [INFO] - Tabla 'prueba_obligaciones_resumen_clientes' guardada correctamente.
+2024-09-30 08:54:26 - [INFO] - Proceso completado con éxito y archivos guardados.
+2024-09-30 08:54:26 - [INFO] - Paso TransformarDatosPython finalizado en 1.16s
+2024-09-30 08:54:26 - [INFO] - Finalizó la ejecucion de la tarea TransformarDatosPython, duracion: 00:01.1
+2024-09-30 08:54:27 - [INFO] - Registro de la Ejecución: {'nomb_paquete': 'vghu_prueba_tecnica_originacion_cobranza', 'nomb_proceso': 'Orq 2 prueba tecnica originacion cobranza', 'fecha_inicio': 20240930, 'hora_inicio': '08:54:09', 'fecha_fin': 20240930, 'hora_fin': '08:54:26', 'duracion': 17.62, 'estado_fin': 'OK', 'texto_fin': 'Correcto'}
+2024-09-30 08:54:27 - [INFO] - ------------------------------------------------
+2024-09-30 08:54:27 - [INFO] - Finalizó Orquestador Satisfactoriamente
+2024-09-30 08:54:27 - [INFO] - Duración Total en 17.67s
+2024-09-30 08:54:27 - [INFO] - ------------------------------------------------

@@ -1,0 +1,30 @@
+2024-09-29 18:16:27 - [INFO] - --------------------------------------------------
+2024-09-29 18:16:27 - [INFO] - ORQ 2 PRUEBA TECNICA ORIGINACION COBRANZA
+2024-09-29 18:16:27 - [INFO] - --------------------------------------------------
+2024-09-29 18:16:27 - [INFO] - Guardado logs en: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\logs\20240929_181627_orq_2_prueba_tecnica_originacion_cobranza.log
+2024-09-29 18:16:33 - [INFO] - Versión de Orquestador: 1.3.6
+2024-09-29 18:16:33 - [INFO] - Inicializando Ejecución de Orquestador
+2024-09-29 18:16:33 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 18:16:33 - [INFO] - Inicia la ejecucion de la tarea ExtractTransformLoad
+2024-09-29 18:16:33 - [INFO] - ------------------------------------------------
+2024-09-29 18:16:33 - [INFO] - Ejecutando Paso ** ExtractTransformLoad **
+2024-09-29 18:16:33 - [INFO] - Paso ExtractTransformLoad finalizado en 0.0s
+2024-09-29 18:16:33 - [INFO] - Finalizó la ejecucion de la tarea ExtractTransformLoad, duracion: 00:00.0
+2024-09-29 18:16:33 - [INFO] - Inicia la ejecucion de la tarea TransformarDatosPython
+2024-09-29 18:16:33 - [INFO] - ------------------------------------------------
+2024-09-29 18:16:33 - [INFO] - Ejecutando Paso ** TransformarDatosPython **
+2024-09-29 18:16:34 - [INFO] - Datos cargados correctamente.
+2024-09-29 18:16:34 - [INFO] - Productos limpios.
+2024-09-29 18:16:34 - [INFO] - Concatenación de segmentos en obligaciones.
+2024-09-29 18:16:34 - [INFO] - Concatenación de segmentos en tasas.
+2024-09-29 18:16:34 - [INFO] - Tasas asignadas.
+2024-09-29 18:16:34 - [INFO] - Tasa efectiva y valor final calculados.
+2024-09-29 18:16:34 - [INFO] - Resumen por cliente calculado.
+2024-09-29 18:16:34 - [INFO] - Proceso completado con éxito y archivo guardado.
+2024-09-29 18:16:34 - [INFO] - Paso TransformarDatosPython finalizado en 0.54s
+2024-09-29 18:16:34 - [INFO] - Finalizó la ejecucion de la tarea TransformarDatosPython, duracion: 00:00.5
+2024-09-29 18:16:34 - [INFO] - Registro de la Ejecución: {'nomb_paquete': 'vghu_prueba_tecnica_originacion_cobranza', 'nomb_proceso': 'Orq 2 prueba tecnica originacion cobranza', 'fecha_inicio': 20240929, 'hora_inicio': '18:16:33', 'fecha_fin': 20240929, 'hora_fin': '18:16:34', 'duracion': 0.57, 'estado_fin': 'OK', 'texto_fin': 'Correcto'}
+2024-09-29 18:16:34 - [INFO] - ------------------------------------------------
+2024-09-29 18:16:34 - [INFO] - Finalizó Orquestador Satisfactoriamente
+2024-09-29 18:16:34 - [INFO] - Duración Total en 0.61s
+2024-09-29 18:16:34 - [INFO] - ------------------------------------------------

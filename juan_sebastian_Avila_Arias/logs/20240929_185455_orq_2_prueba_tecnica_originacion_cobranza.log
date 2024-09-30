@@ -1,0 +1,143 @@
+2024-09-29 18:54:55 - [INFO] - --------------------------------------------------
+2024-09-29 18:54:55 - [INFO] - ORQ 2 PRUEBA TECNICA ORIGINACION COBRANZA
+2024-09-29 18:54:55 - [INFO] - --------------------------------------------------
+2024-09-29 18:54:55 - [INFO] - Guardado logs en: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\logs\20240929_185455_orq_2_prueba_tecnica_originacion_cobranza.log
+2024-09-29 18:55:01 - [INFO] - Versión de Orquestador: 1.3.6
+2024-09-29 18:55:01 - [INFO] - Inicializando Ejecución de Orquestador
+2024-09-29 18:55:01 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 18:55:01 - [INFO] - Inicia la ejecucion de la tarea ExtractTransformLoad
+2024-09-29 18:55:01 - [INFO] - ------------------------------------------------
+2024-09-29 18:55:01 - [INFO] - Ejecutando Paso ** ExtractTransformLoad **
+2024-09-29 18:55:01 - [INFO] - Paso ExtractTransformLoad finalizado en 0.0s
+2024-09-29 18:55:01 - [INFO] - Finalizó la ejecucion de la tarea ExtractTransformLoad, duracion: 00:00.0
+2024-09-29 18:55:01 - [INFO] - Inicia la ejecucion de la tarea transformarDatosSQL
+2024-09-29 18:55:01 - [INFO] - ------------------------------------------------
+2024-09-29 18:55:01 - [INFO] - Ejecutando Paso ** transformarDatosSQL **
+2024-09-29 18:55:01 - [INFO] - Iniciando la ejecución de los archivos SQL en la ruta: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/
+2024-09-29 18:55:01 - [INFO] - Ejecutando Directorio: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/
+2024-09-29 18:55:01 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\001_creacion_obligaciones_productos_limpios.sql
+2024-09-29 18:55:01 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 18:55:01 - [INFO] - Transcurrido: 1727654101, Tiempo de Refresco = 1000
+2024-09-29 18:55:02 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_productos_limpios;
+2024-09-29 18:55:04 - [INFO] - Finalizó la ejecucion del query, duracion: 00:02.1
+2024-09-29 18:55:04 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_productos_limpios AS
+            SELECT oblg.*, 
+                LOWER(
+                    CASE 
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*cartera tota[l]*$', 'i') THEN 'cartera'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*cartera$', 'i') THEN 'cartera'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta de cr[ée]dito$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta de crÃ©dito$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*operacion_especifica$', 'i') THEN 'operacion_especifica'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*sufi$', 'i') THEN 'sufi'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*leasing$', 'i') THEN 'leasing'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*hipotecario$', 'i') THEN 'hipotecario'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*factoring$', 'i') THEN 'factoring'
+                        ELSE TRIM(REGEXP_REPLACE(oblg.id_producto, '^[0-9]+-*\\s*', ''))
+                    END
+                ) AS producto_limpio
+            FROM proceso.prueba_obligaciones_clientes oblg;
+2024-09-29 18:55:05 - [INFO] - Finalizó la ejecucion del query, duracion: 00:01.2
+2024-09-29 18:55:05 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\002_concatenar_columnas_necesarias.sql
+2024-09-29 18:55:05 - [INFO] - Se agregaron 4 consultas al plan de ejecucion
+2024-09-29 18:55:05 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_concatenadas;
+2024-09-29 18:55:05 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.3
+2024-09-29 18:55:05 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_concatenadas AS
+            SELECT 
+                oblg.*, 
+                CONCAT(
+                    CAST(oblg.cod_segm_tasa AS STRING), '-', 
+                    CAST(oblg.cod_subsegm_tasa AS STRING), '-', 
+                    oblg.cal_interna_tasa  
+                ) AS concatenacion_segmento
+            FROM proceso.prueba_obligaciones_productos_limpios oblg;
+2024-09-29 18:55:07 - [INFO] - Finalizó la ejecucion del query, duracion: 00:01.2
+2024-09-29 18:55:07 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_tasas_concatenadas;
+2024-09-29 18:55:07 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.3
+2024-09-29 18:55:07 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_tasas_concatenadas AS
+            SELECT 
+                t.*, 
+                CONCAT(
+                    CAST(t.cod_segmento AS STRING), '-', 
+                    CAST(t.cod_subsegmento AS STRING), '-', 
+                    t.calificacion_riesgos  
+                ) AS concatenacion_segmento_riesgo
+            FROM proceso.prueba_tasas_productos t;
+2024-09-29 18:55:07 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.5
+2024-09-29 18:55:07 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\003_obligaciones_con_tasa.sql
+2024-09-29 18:55:08 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 18:55:08 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_con_tasas;
+2024-09-29 18:55:08 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.3
+2024-09-29 18:55:08 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_con_tasas AS
+            SELECT 
+                oblg.num_documento, 
+                oblg.id_producto, 
+                oblg.producto_limpio AS producto, 
+                oblg.cod_segm_tasa,
+                oblg.cod_subsegm_tasa,
+                oblg.cal_interna_tasa
+                oblg.plazo,
+                oblg.cod_periodicidad,
+                oblg.periodicidad,
+                oblg.valor_inicial,
+                t.concatenacion_segmento_riesgo, 
+                oblg.concatenacion_segmento,
+                CASE 
+                    WHEN oblg.producto_limpio = 'cartera' THEN t.tasa_cartera
+                    WHEN oblg.producto_limpio = 'operacion_especifica' THEN t.tasa_operacion_especifica
+                    WHEN oblg.producto_limpio = 'leasing' THEN t.tasa_leasing
+                    WHEN oblg.producto_limpio = 'tarjeta' THEN t.tasa_tarjeta
+                    WHEN oblg.producto_limpio = 'sufi' THEN t.tasa_sufi
+                    WHEN oblg.producto_limpio = 'factoring' THEN t.tasa_factoring
+                    WHEN oblg.producto_limpio = 'hipotecario' THEN t.tasa_hipotecario
+                    ELSE NULL
+                END AS tasa_aplicada
+            FROM proceso.prueba_obligaciones_concatenadas oblg
+            LEFT JOIN proceso.prueba_tasas_concatenadas t
+            ON oblg.concatenacion_segmento = t.concatenacion_segmento_riesgo;
+2024-09-29 18:55:08 - [ERROR] - Error en ejecucion de consulta
+Traceback (most recent call last):
+  File "C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\helper\helper.py", line 780, in _reStarter
+    cursor.execute(consulta)
+pyodbc.Error: ('HY000', '[HY000] [Cloudera][ImpalaODBC] (110) Error while executing a query in Impala: [HY000] : ParseException: Syntax error in line 9:\n    oblg.plazo,\n        ^\nEncountered: .\nExpected: CROSS, FROM, FULL, GROUP, HAVING, INNER, JOIN, LEFT, LIMIT, OFFSET, ON, ORDER, RIGHT, STRAIGHT_JOIN, TABLESAMPLE, UNION, USING, WHERE, COMMA\n\nCAUSED BY: Exception: Syntax error\n (110) (SQLExecDirectW)')
+2024-09-29 18:55:08 - [ERROR] - 
+            [HY000] [Cloudera][ImpalaODBC] (110) Error while executing a query in Impala: [HY000] : ParseException: Syntax error in line 9:
+                oblg.plazo,
+                    ^
+            Encountered: .
+            Expected: CROSS, FROM, FULL, GROUP, HAVING, INNER, JOIN, LEFT, LIMIT, OFFSET, ON, ORDER, RIGHT, STRAIGHT_JOIN, TABLESAMPLE, UNION, USING, WHERE, COMMA
+            
+            CAUSED BY: Exception: Syntax error
+             (110) (SQLExecDirectW)
+2024-09-29 18:55:08 - [ERROR] - Problemas con executeFolder!, Directorio: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/, Error: ('HY000', '[HY000] [Cloudera][ImpalaODBC] (110) Error while executing a query in Impala: [HY000] : ParseException: Syntax error in line 9:\n    oblg.plazo,\n        ^\nEncountered: .\nExpected: CROSS, FROM, FULL, GROUP, HAVING, INNER, JOIN, LEFT, LIMIT, OFFSET, ON, ORDER, RIGHT, STRAIGHT_JOIN, TABLESAMPLE, UNION, USING, WHERE, COMMA\n\nCAUSED BY: Exception: Syntax error\n (110) (SQLExecDirectW)') 
+2024-09-29 18:55:08 - [ERROR] - Ocurrió un error inesperado durante la ejecución de los SQL: ('HY000', '[HY000] [Cloudera][ImpalaODBC] (110) Error while executing a query in Impala: [HY000] : ParseException: Syntax error in line 9:\n    oblg.plazo,\n        ^\nEncountered: .\nExpected: CROSS, FROM, FULL, GROUP, HAVING, INNER, JOIN, LEFT, LIMIT, OFFSET, ON, ORDER, RIGHT, STRAIGHT_JOIN, TABLESAMPLE, UNION, USING, WHERE, COMMA\n\nCAUSED BY: Exception: Syntax error\n (110) (SQLExecDirectW)')
+2024-09-29 18:55:08 - [ERROR] - Error: Falló el paso transformarDatosSQL, Error Encontrado: ('HY000', '[HY000] [Cloudera][ImpalaODBC] (110) Error while executing a query in Impala: [HY000] : ParseException: Syntax error in line 9:\n    oblg.plazo,\n        ^\nEncountered: .\nExpected: CROSS, FROM, FULL, GROUP, HAVING, INNER, JOIN, LEFT, LIMIT, OFFSET, ON, ORDER, RIGHT, STRAIGHT_JOIN, TABLESAMPLE, UNION, USING, WHERE, COMMA\n\nCAUSED BY: Exception: Syntax error\n (110) (SQLExecDirectW)')
+2024-09-29 18:55:08 - [ERROR] - ------------ ERROR EN EJECUCION  ---------------------
+2024-09-29 18:55:08 - [ERROR] - El Orquestador ha encontrado un Error en el proceso
+2024-09-29 18:55:08 - [ERROR] - Error en Orq 2 prueba tecnica originacion cobranza
+2024-09-29 18:55:08 - [ERROR] - Tipo de Excepcion : Error 
+2024-09-29 18:55:08 - [ERROR] - Mensaje : ('HY000', '[HY000] [Cloudera][ImpalaODBC] (110) Error while executing a query in Impala: [HY000] : ParseException: Syntax error in line 9:\n    oblg.plazo,\n        ^\nEncountered: .\nExpected: CROSS, FROM, FULL, GROUP, HAVING, INNER, JOIN, LEFT, LIMIT, OFFSET, ON, ORDER, RIGHT, STRAIGHT_JOIN, TABLESAMPLE, UNION, USING, WHERE, COMMA\n\nCAUSED BY: Exception: Syntax error\n (110) (SQLExecDirectW)')
+2024-09-29 18:55:08 - [ERROR] - Stack Trace:
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\orquestador2.py , Line : 611, Func.Name : ejecutar, Message : self.reStarter(sx, maxTries=mT)
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\orquestador2.py , Line : 355, Func.Name : reStarter, Message : raise ex
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\orquestador2.py , Line : 350, Func.Name : reStarter, Message : step.ejecutar()
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\etl.py , Line : 91, Func.Name : ejecutar, Message : raise e  # Relanzar la excepción para asegurar que no se ignoren errores críticos
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\etl.py , Line : 82, Func.Name : ejecutar, Message : self.executeFolder(ruta)
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\step.py , Line : 322, Func.Name : executeFolder, Message : recorrer(folder + os.sep + file)
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\step.py , Line : 303, Func.Name : recorrer, Message : recorrer(folder + os.sep + file )
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\step.py , Line : 309, Func.Name : recorrer, Message : self.helper.ejecutar_archivo(folder , params, diagnostico = diagnostico)
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\helper\helper.py , Line : 238, Func.Name : ejecutar_archivo, Message : self._ejecutar_consulta(cursor, i, consulta, diagnos=diagnostico)
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\helper\helper.py , Line : 1100, Func.Name : _ejecutar_consulta, Message : res_consulta = self._reStarter(cursor, query_id, consulta, end=end)
+2024-09-29 18:55:08 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\helper\helper.py , Line : 780, Func.Name : _reStarter, Message : cursor.execute(consulta)
+2024-09-29 18:55:08 - [INFO] - Registro de la Ejecución: {'nomb_paquete': 'vghu_prueba_tecnica_originacion_cobranza', 'nomb_proceso': 'Orq 2 prueba tecnica originacion cobranza', 'fecha_inicio': 20240929, 'hora_inicio': '18:55:01', 'fecha_fin': 20240929, 'hora_fin': '18:55:08', 'duracion': 7.35, 'estado_fin': 'ERROR', 'texto_fin': "('HY000', '[HY000] [Cloudera][ImpalaODBC] (110) Error while executing a query in Impala: [HY000] : ParseException: Syntax error in line 9:\\n    oblg.plazo,\\n        ^\\nEncountered: .\\nExpected: CROSS, FROM, FULL, GROUP, HAVING, INNER, JOIN, LEFT, LIMIT, OFFSET, ON, ORDER, RIGHT, STRAIGHT_JOIN, TABLESAMPLE, UNION, USING, WHERE, COMMA\\n\\nCAUSED BY: Exception: Syntax error\\n (110) (SQLExecDirectW)')"}
+2024-09-29 18:55:08 - [INFO] - Duración Total en 7.34s
+2024-09-29 18:55:08 - [INFO] - ------------------------------------------------

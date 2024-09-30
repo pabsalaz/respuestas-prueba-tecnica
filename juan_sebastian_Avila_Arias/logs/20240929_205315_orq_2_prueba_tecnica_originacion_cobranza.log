@@ -1,0 +1,32 @@
+2024-09-29 20:53:15 - [INFO] - --------------------------------------------------
+2024-09-29 20:53:15 - [INFO] - ORQ 2 PRUEBA TECNICA ORIGINACION COBRANZA
+2024-09-29 20:53:15 - [INFO] - --------------------------------------------------
+2024-09-29 20:53:15 - [INFO] - Guardado logs en: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\logs\20240929_205315_orq_2_prueba_tecnica_originacion_cobranza.log
+2024-09-29 20:53:21 - [INFO] - Versión de Orquestador: 1.3.6
+2024-09-29 20:53:21 - [INFO] - Inicializando Ejecución de Orquestador
+2024-09-29 20:53:21 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 20:53:21 - [INFO] - Inicia la ejecucion de la tarea ExtractTransformLoad
+2024-09-29 20:53:21 - [INFO] - ------------------------------------------------
+2024-09-29 20:53:21 - [INFO] - Ejecutando Paso ** ExtractTransformLoad **
+2024-09-29 20:53:21 - [INFO] - Paso ExtractTransformLoad finalizado en 0.0s
+2024-09-29 20:53:21 - [INFO] - Finalizó la ejecucion de la tarea ExtractTransformLoad, duracion: 00:00.0
+2024-09-29 20:53:21 - [INFO] - Inicia la ejecucion de la tarea TransformarDatosPython
+2024-09-29 20:53:21 - [INFO] - ------------------------------------------------
+2024-09-29 20:53:21 - [INFO] - Ejecutando Paso ** TransformarDatosPython **
+2024-09-29 20:53:22 - [INFO] - Datos cargados correctamente.
+2024-09-29 20:53:22 - [INFO] - Productos limpios.
+2024-09-29 20:53:22 - [INFO] - Concatenación de segmentos en obligaciones.
+2024-09-29 20:53:22 - [INFO] - Concatenación de segmentos en tasas.
+2024-09-29 20:53:22 - [INFO] - Tasas asignadas.
+2024-09-29 20:53:22 - [INFO] - Tasa efectiva y valor final calculados.
+2024-09-29 20:53:23 - [INFO] - Tabla 'prueba_obligaciones_con_valor_final' guardada en C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/Resultados/prueba_obligaciones_con_valor_final.xlsx.
+2024-09-29 20:53:23 - [INFO] - Resumen por cliente calculado.
+2024-09-29 20:53:23 - [INFO] - Tabla 'prueba_obligaciones_resumen_clientes' guardada en C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/Resultados/prueba_obligaciones_resumen_clientes.xlsx.
+2024-09-29 20:53:23 - [INFO] - Proceso completado con éxito y archivos guardados.
+2024-09-29 20:53:23 - [INFO] - Paso TransformarDatosPython finalizado en 1.68s
+2024-09-29 20:53:23 - [INFO] - Finalizó la ejecucion de la tarea TransformarDatosPython, duracion: 00:01.6
+2024-09-29 20:53:23 - [INFO] - Registro de la Ejecución: {'nomb_paquete': 'vghu_prueba_tecnica_originacion_cobranza', 'nomb_proceso': 'Orq 2 prueba tecnica originacion cobranza', 'fecha_inicio': 20240929, 'hora_inicio': '20:53:21', 'fecha_fin': 20240929, 'hora_fin': '20:53:23', 'duracion': 1.71, 'estado_fin': 'OK', 'texto_fin': 'Correcto'}
+2024-09-29 20:53:23 - [INFO] - ------------------------------------------------
+2024-09-29 20:53:23 - [INFO] - Finalizó Orquestador Satisfactoriamente
+2024-09-29 20:53:23 - [INFO] - Duración Total en 1.75s
+2024-09-29 20:53:23 - [INFO] - ------------------------------------------------

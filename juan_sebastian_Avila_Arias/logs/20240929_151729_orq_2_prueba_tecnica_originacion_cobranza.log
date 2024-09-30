@@ -1,0 +1,70 @@
+2024-09-29 15:17:29 - [INFO] - --------------------------------------------------
+2024-09-29 15:17:29 - [INFO] - ORQ 2 PRUEBA TECNICA ORIGINACION COBRANZA
+2024-09-29 15:17:29 - [INFO] - --------------------------------------------------
+2024-09-29 15:17:29 - [INFO] - Guardado logs en: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\logs\20240929_151729_orq_2_prueba_tecnica_originacion_cobranza.log
+2024-09-29 15:17:35 - [INFO] - Versión de Orquestador: 1.3.6
+2024-09-29 15:17:35 - [INFO] - Inicializando Ejecución de Orquestador
+2024-09-29 15:17:35 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 15:17:35 - [INFO] - Inicia la ejecucion de la tarea ExtractTransformLoad
+2024-09-29 15:17:35 - [INFO] - ------------------------------------------------
+2024-09-29 15:17:35 - [INFO] - Ejecutando Paso ** ExtractTransformLoad **
+2024-09-29 15:17:35 - [INFO] - Paso ExtractTransformLoad finalizado en 0.0s
+2024-09-29 15:17:35 - [INFO] - Finalizó la ejecucion de la tarea ExtractTransformLoad, duracion: 00:00.0
+2024-09-29 15:17:35 - [INFO] - Inicia la ejecucion de la tarea transformarDatos
+2024-09-29 15:17:35 - [INFO] - ------------------------------------------------
+2024-09-29 15:17:35 - [INFO] - Ejecutando Paso ** transformarDatos **
+2024-09-29 15:17:35 - [INFO] - Ejecutando Directorio: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/
+2024-09-29 15:17:35 - [INFO] - Ejecutando archivo: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/\ExtractTransformLoad\001_creacion_obligaciones_productos_limpios.sql
+2024-09-29 15:17:36 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 15:17:36 - [INFO] - Transcurrido: 1727641056, Tiempo de Refresco = 1000
+2024-09-29 15:17:36 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            DROP TABLE IF EXISTS proceso.prueba_obligaciones_productos_limpios;
+2024-09-29 15:17:37 - [INFO] - Finalizó la ejecucion del query, duracion: 00:00.4
+2024-09-29 15:17:37 - [INFO] - Inicia la ejecucion de la siguiente consulta:
+            CREATE TABLE proceso.prueba_obligaciones_productos_limpios AS
+            SELECT oblg.*, 
+                LOWER(
+                    CASE 
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*cartera tota[l]*$', 'i') THEN 'cartera'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*cartera$', 'i') THEN 'cartera'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta de cr[ée]dito$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*tarjeta de crÃ©dito$', 'i') THEN 'tarjeta'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*operacion_especifica$', 'i') THEN 'operacion_especifica'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*sufi$', 'i') THEN 'sufi'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*leasing$', 'i') THEN 'leasing'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*hipotecario$', 'i') THEN 'hipotecario'
+                        WHEN REGEXP_LIKE(oblg.id_producto, '-?\\s*factoring$', 'i') THEN 'factoring'
+                        ELSE TRIM(REGEXP_REPLACE(oblg.id_producto, '^[0-9]+-*\\s*', ''))
+                    END
+                ) AS producto_limpio
+            FROM prueba_obligaciones_clientes oblg;
+2024-09-29 15:17:37 - [ERROR] - Error en ejecucion de consulta
+Traceback (most recent call last):
+  File "C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\helper\helper.py", line 780, in _reStarter
+    cursor.execute(consulta)
+pyodbc.Error: ('HY000', "[HY000] [Cloudera][ImpalaODBC] (370) Query analysis error occurred during query execution: [HY000] : AnalysisException: Could not resolve table reference: 'prueba_obligaciones_clientes'\n (370) (SQLExecDirectW)")
+2024-09-29 15:17:37 - [ERROR] - 
+            [HY000] [Cloudera][ImpalaODBC] (370) Query analysis error occurred during query execution: [HY000] : AnalysisException: Could not resolve table reference: 'prueba_obligaciones_clientes'
+             (370) (SQLExecDirectW)
+2024-09-29 15:17:37 - [ERROR] - Problemas con executeFolder!, Directorio: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\static/sql/, Error: ('HY000', "[HY000] [Cloudera][ImpalaODBC] (370) Query analysis error occurred during query execution: [HY000] : AnalysisException: Could not resolve table reference: 'prueba_obligaciones_clientes'\n (370) (SQLExecDirectW)") 
+2024-09-29 15:17:37 - [ERROR] - Error: Falló el paso transformarDatos, Error Encontrado: ('HY000', "[HY000] [Cloudera][ImpalaODBC] (370) Query analysis error occurred during query execution: [HY000] : AnalysisException: Could not resolve table reference: 'prueba_obligaciones_clientes'\n (370) (SQLExecDirectW)")
+2024-09-29 15:17:37 - [ERROR] - ------------ ERROR EN EJECUCION  ---------------------
+2024-09-29 15:17:37 - [ERROR] - El Orquestador ha encontrado un Error en el proceso
+2024-09-29 15:17:37 - [ERROR] - Error en Orq 2 prueba tecnica originacion cobranza
+2024-09-29 15:17:37 - [ERROR] - Tipo de Excepcion : Error 
+2024-09-29 15:17:37 - [ERROR] - Mensaje : ('HY000', "[HY000] [Cloudera][ImpalaODBC] (370) Query analysis error occurred during query execution: [HY000] : AnalysisException: Could not resolve table reference: 'prueba_obligaciones_clientes'\n (370) (SQLExecDirectW)")
+2024-09-29 15:17:37 - [ERROR] - Stack Trace:
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\orquestador2\orquestador2.py , Line : 611, Func.Name : ejecutar, Message : self.reStarter(sx, maxTries=mT)
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\orquestador2\orquestador2.py , Line : 355, Func.Name : reStarter, Message : raise ex
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\orquestador2\orquestador2.py , Line : 350, Func.Name : reStarter, Message : step.ejecutar()
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\etl.py , Line : 76, Func.Name : ejecutar, Message : self.executeFolder(ruta)
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\orquestador2\step.py , Line : 322, Func.Name : executeFolder, Message : recorrer(folder + os.sep + file)
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\orquestador2\step.py , Line : 303, Func.Name : recorrer, Message : recorrer(folder + os.sep + file )
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\orquestador2\step.py , Line : 309, Func.Name : recorrer, Message : self.helper.ejecutar_archivo(folder , params, diagnostico = diagnostico)
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\helper\helper.py , Line : 238, Func.Name : ejecutar_archivo, Message : self._ejecutar_consulta(cursor, i, consulta, diagnos=diagnostico)
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\helper\helper.py , Line : 1100, Func.Name : _ejecutar_consulta, Message : res_consulta = self._reStarter(cursor, query_id, consulta, end=end)
+2024-09-29 15:17:37 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\.venv\lib\site-packages\helper\helper.py , Line : 780, Func.Name : _reStarter, Message : cursor.execute(consulta)
+2024-09-29 15:17:37 - [INFO] - Registro de la Ejecución: {'nomb_paquete': 'vghu_prueba_tecnica_originacion_cobranza', 'nomb_proceso': 'Orq 2 prueba tecnica originacion cobranza', 'fecha_inicio': 20240929, 'hora_inicio': '15:17:35', 'fecha_fin': 20240929, 'hora_fin': '15:17:37', 'duracion': 1.57, 'estado_fin': 'ERROR', 'texto_fin': '(\'HY000\', \\"[HY000] [Cloudera][ImpalaODBC] (370) Query analysis error occurred during query execution: [HY000] : AnalysisException: Could not resolve table reference: \'prueba_obligaciones_clientes\'\\n (370) (SQLExecDirectW)\\")'}
+2024-09-29 15:17:37 - [INFO] - Duración Total en 1.56s
+2024-09-29 15:17:37 - [INFO] - ------------------------------------------------

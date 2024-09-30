@@ -1,0 +1,36 @@
+2024-09-29 18:09:58 - [INFO] - --------------------------------------------------
+2024-09-29 18:09:58 - [INFO] - ORQ 2 PRUEBA TECNICA ORIGINACION COBRANZA
+2024-09-29 18:09:58 - [INFO] - --------------------------------------------------
+2024-09-29 18:09:58 - [INFO] - Guardado logs en: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\logs\20240929_180958_orq_2_prueba_tecnica_originacion_cobranza.log
+2024-09-29 18:10:04 - [INFO] - Versión de Orquestador: 1.3.6
+2024-09-29 18:10:04 - [INFO] - Inicializando Ejecución de Orquestador
+2024-09-29 18:10:04 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-29 18:10:04 - [INFO] - Inicia la ejecucion de la tarea ExtractTransformLoad
+2024-09-29 18:10:04 - [INFO] - ------------------------------------------------
+2024-09-29 18:10:04 - [INFO] - Ejecutando Paso ** ExtractTransformLoad **
+2024-09-29 18:10:04 - [INFO] - Paso ExtractTransformLoad finalizado en 0.0s
+2024-09-29 18:10:04 - [INFO] - Finalizó la ejecucion de la tarea ExtractTransformLoad, duracion: 00:00.0
+2024-09-29 18:10:04 - [INFO] - Inicia la ejecucion de la tarea TransformarDatosPython
+2024-09-29 18:10:04 - [INFO] - ------------------------------------------------
+2024-09-29 18:10:04 - [INFO] - Ejecutando Paso ** TransformarDatosPython **
+2024-09-29 18:10:04 - [ERROR] - Ocurrió un error inesperado durante el proceso: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2024-09-29 18:10:04 - [ERROR] - Error: Falló el paso TransformarDatosPython, Error Encontrado: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2024-09-29 18:10:04 - [ERROR] - ------------ ERROR EN EJECUCION  ---------------------
+2024-09-29 18:10:04 - [ERROR] - El Orquestador ha encontrado un Error en el proceso
+2024-09-29 18:10:04 - [ERROR] - Error en Orq 2 prueba tecnica originacion cobranza
+2024-09-29 18:10:04 - [ERROR] - Tipo de Excepcion : ImportError 
+2024-09-29 18:10:04 - [ERROR] - Mensaje : Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2024-09-29 18:10:04 - [ERROR] - Stack Trace:
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\orquestador2.py , Line : 611, Func.Name : ejecutar, Message : self.reStarter(sx, maxTries=mT)
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\orquestador2.py , Line : 355, Func.Name : reStarter, Message : raise ex
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\orquestador2\orquestador2.py , Line : 350, Func.Name : reStarter, Message : step.ejecutar()
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\etl.py , Line : 309, Func.Name : ejecutar, Message : raise e
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\etl.py , Line : 278, Func.Name : ejecutar, Message : self.cargar_datos()
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\src\vghu_prueba_tecnica_originacion_cobranza\etl.py , Line : 147, Func.Name : cargar_datos, Message : self.df_obligaciones = pd.read_excel(archivo_obligaciones)
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\pandas\io\excel\_base.py , Line : 495, Func.Name : read_excel, Message : io = ExcelFile(
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\pandas\io\excel\_base.py , Line : 1567, Func.Name : __init__, Message : self._reader = self._engines[engine](
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\pandas\io\excel\_openpyxl.py , Line : 552, Func.Name : __init__, Message : import_optional_dependency("openpyxl")
+2024-09-29 18:10:04 - [ERROR] - ----> File : C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\venv\lib\site-packages\pandas\compat\_optional.py , Line : 138, Func.Name : import_optional_dependency, Message : raise ImportError(msg)
+2024-09-29 18:10:04 - [INFO] - Registro de la Ejecución: {'nomb_paquete': 'vghu_prueba_tecnica_originacion_cobranza', 'nomb_proceso': 'Orq 2 prueba tecnica originacion cobranza', 'fecha_inicio': 20240929, 'hora_inicio': '18:10:04', 'fecha_fin': 20240929, 'hora_fin': '18:10:04', 'duracion': 0.03, 'estado_fin': 'ERROR', 'texto_fin': "Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl."}
+2024-09-29 18:10:04 - [INFO] - Duración Total en 0.02s
+2024-09-29 18:10:04 - [INFO] - ------------------------------------------------

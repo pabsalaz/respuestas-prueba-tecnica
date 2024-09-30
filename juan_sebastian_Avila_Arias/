@@ -1,0 +1,53 @@
+[33mcommit 1961430a6138448e945d14ae71560d96dac26c4c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 17:38:15 2024 -0500
+
+    actualice el gitignore
+
+[33mcommit 4703fa22864507b8ce059faad2e1124fcc91c9d4[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 17:32:05 2024 -0500
+
+    Se realiza la parte 2 de la prueba, donde se genera la misma logica pero en python. Inclui otra clase pero de python
+
+[33mcommit cafca841b397924fa36860a48553a5ba11f02258[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 17:01:11 2024 -0500
+
+    Termine toda la logica exigida en SQL, incluyendo el punto 4
+
+[33mcommit e16915151773ee742a251f587afe474cc1ff56e3[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 16:54:26 2024 -0500
+
+    Se realiza el punto 2 y 3, donde se crea la tasa efectiva y se creala el valor final
+
+[33mcommit 87794411ac02ce471beaba7fde98e6e9dff37a90[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 16:39:19 2024 -0500
+
+    correción del punto 1, asignación de tasas a las obligaciones
+
+[33mcommit 6c7c90bf8848a729b9fed3036317626586806741[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 15:25:32 2024 -0500
+
+    Se realiza el punto 1, donde se toma las obligaciones de cada cliente y se le agrega la tasa correspondiente
+
+[33mcommit d5905d5dd1c98f8692b2990c449a783b16fa5e1c[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 13:44:36 2024 -0500
+
+    Se cargan las df obligaciones_clientes y el df tasas_productos a la zona de proceso en la LZ
+
+[33mcommit 0116e980d82e3dd23291cb81a5fb6274ca65c842[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 12:29:30 2024 -0500
+
+    Se adjuntan los archivos necesarias en excel de la prueba
+
+[33mcommit 392f70c302581cd4c35057e6e1c9579084fda515[m
+Author: Juan Sebastian Avila A <juavila@bancolombia.com.co>
+Date:   Sun Sep 29 12:26:24 2024 -0500
+
+    Se crea el proyecto con el Orquestador 2 y se instala las librerias necesarias

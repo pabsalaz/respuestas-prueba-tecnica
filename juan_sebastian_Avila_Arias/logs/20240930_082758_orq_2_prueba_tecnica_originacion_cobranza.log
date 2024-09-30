@@ -1,0 +1,32 @@
+2024-09-30 08:27:58 - [INFO] - --------------------------------------------------
+2024-09-30 08:27:58 - [INFO] - ORQ 2 PRUEBA TECNICA ORIGINACION COBRANZA
+2024-09-30 08:27:58 - [INFO] - --------------------------------------------------
+2024-09-30 08:27:58 - [INFO] - Guardado logs en: C:\Users\juavila\Documents\Prueba_tecnica_Originacion_Cobranza\vghu-prueba-tecnica-originacion-cobranza\logs\20240930_082758_orq_2_prueba_tecnica_originacion_cobranza.log
+2024-09-30 08:28:06 - [INFO] - Versión de Orquestador: 1.3.6
+2024-09-30 08:28:06 - [INFO] - Inicializando Ejecución de Orquestador
+2024-09-30 08:28:06 - [INFO] - Se agregaron 2 consultas al plan de ejecucion
+2024-09-30 08:28:06 - [INFO] - Inicia la ejecucion de la tarea ExtractTransformLoad
+2024-09-30 08:28:06 - [INFO] - ------------------------------------------------
+2024-09-30 08:28:06 - [INFO] - Ejecutando Paso ** ExtractTransformLoad **
+2024-09-30 08:28:06 - [INFO] - Paso ExtractTransformLoad finalizado en 0.0s
+2024-09-30 08:28:06 - [INFO] - Finalizó la ejecucion de la tarea ExtractTransformLoad, duracion: 00:00.0
+2024-09-30 08:28:06 - [INFO] - Inicia la ejecucion de la tarea TransformarDatosPython
+2024-09-30 08:28:06 - [INFO] - ------------------------------------------------
+2024-09-30 08:28:06 - [INFO] - Ejecutando Paso ** TransformarDatosPython **
+2024-09-30 08:28:06 - [INFO] - Datos cargados correctamente.
+2024-09-30 08:28:06 - [INFO] - Productos limpios.
+2024-09-30 08:28:06 - [INFO] - Concatenación de segmentos en obligaciones.
+2024-09-30 08:28:06 - [INFO] - Concatenación de segmentos en tasas.
+2024-09-30 08:28:06 - [INFO] - Tasas asignadas.
+2024-09-30 08:28:06 - [INFO] - Tasa efectiva y valor final calculados.
+2024-09-30 08:28:08 - [INFO] - Tabla 'prueba_obligaciones_con_valor_final' guardada correctamente.
+2024-09-30 08:28:08 - [INFO] - Resumen por cliente calculado.
+2024-09-30 08:28:08 - [INFO] - Tabla 'prueba_obligaciones_resumen_clientes' guardada correctamente.
+2024-09-30 08:28:08 - [INFO] - Proceso completado con éxito y archivos guardados.
+2024-09-30 08:28:08 - [INFO] - Paso TransformarDatosPython finalizado en 1.93s
+2024-09-30 08:28:08 - [INFO] - Finalizó la ejecucion de la tarea TransformarDatosPython, duracion: 00:01.9
+2024-09-30 08:28:08 - [INFO] - Registro de la Ejecución: {'nomb_paquete': 'vghu_prueba_tecnica_originacion_cobranza', 'nomb_proceso': 'Orq 2 prueba tecnica originacion cobranza', 'fecha_inicio': 20240930, 'hora_inicio': '08:28:06', 'fecha_fin': 20240930, 'hora_fin': '08:28:08', 'duracion': 1.97, 'estado_fin': 'OK', 'texto_fin': 'Correcto'}
+2024-09-30 08:28:08 - [INFO] - ------------------------------------------------
+2024-09-30 08:28:08 - [INFO] - Finalizó Orquestador Satisfactoriamente
+2024-09-30 08:28:08 - [INFO] - Duración Total en 2.02s
+2024-09-30 08:28:08 - [INFO] - ------------------------------------------------

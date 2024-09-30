@@ -1,0 +1,15 @@
+{
+    "global"               : {
+        "dsn"      : "IMAPALA-PROD",
+        "parametros_lz"       : {
+            "prefijo"            : "prueba_",
+            "zona_procesamiento" : "proceso",
+            "in_oozie"           : "resultados.reporte_flujos_oozie"
+        }    
+    },
+    "ExtractTransformLoad" : {
+        "tareas"                : [
+            {"nombre" : "ejecutar_modulos"            , "kwargs" : []}
+        ]
+    }
+}

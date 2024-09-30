@@ -1,0 +1,4 @@
+include src/vghu_prueba_tecnica_originacion_cobranza/static/*.json
+include src/vghu_prueba_tecnica_originacion_cobranza/static/sql/ExtractTransformLoad/*.sql
+include versioneer.py
+include src/vghu_prueba_tecnica_originacion_cobranza/_version.py
