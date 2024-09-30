@@ -21,6 +21,7 @@ Este proyecto está diseñado para realizar un proceso completo de **ETL** (Extr
 
 ### Estructura del Proyecto
 
+  En el archivo etl.py que se encuentra en la ruta src\vghu_prueba_tecnica_originacion_cobranza\etl.py se han generado 3 clases:
   
 - **Clase `SubirData`:** Sube la información de los archivos Excel de obligaciones y productos financieros a la zona de landing (LZ) para ser procesada.
   
@@ -31,7 +32,11 @@ Este proyecto está diseñado para realizar un proceso completo de **ETL** (Extr
 
 ### Resultados Generados
 
+Juan_Sebastian_Avila
 En el archivo etl.py que se encuentra en la ruta src\vghu_prueba_tecnica_originacion_cobranza\etl.py se han generado 3 clases para toda la ETL solicitada:
+
+Los resultados se guardaron en la ruta src\vghu_prueba_tecnica_originacion_cobranza\static\Excel\Resultados:
+main
 
 - `obligacionesValorFinalSQL.xlsx`: Archivo que contiene los resultados procesados con las tasas efectivas y valores finales de las obligaciones.
 - `obligacionesResumenClientesSQL.xlsx`: Resumen por cliente, mostrando la cantidad de productos y el valor final total de sus obligaciones.
@@ -41,7 +46,7 @@ En el archivo etl.py que se encuentra en la ruta src\vghu_prueba_tecnica_origina
 
 ### Documentos Adjuntos
 
-Se adjuntaron los siguientes documentos:
+Se adjuntaron los siguientes documentos en la siguiente ruta src\vghu_prueba_tecnica_originacion_cobranza\static\Resultados:
 
 Los resultados se guardaron en la ruta src\vghu_prueba_tecnica_originacion_cobranza\static\Excel\Resultados:
 
@@ -150,34 +155,5 @@ Archivos generados: Después de la ejecución, revisa los archivos de salida en 
 ## Estructura de las Carpetas
 La estructura del proyecto es la siguiente:
 
-VGHU-PRUEBA-TECNICA-ORIGINACION-COBRANZA/
-│
-├── .azuredevops/                  # Configuración para integración continua (si aplica)
-├── .venv/                         # Ambiente virtual del proyecto
-├── logs/                          # Logs de ejecución
-├── src/
-│   └── vghu_prueba_tecnica_originacion_cobranza/
-│       ├── __pycache__/           # Archivos compilados por Python
-│       ├── static/
-│       │   ├── Excel/
-│       │   │   ├── Insumos/       # Archivos de entrada (obligaciones y tasas)
-│       │   │   │   ├── obligaciones_clientes.xlsx
-│       │   │   │   ├── tasas_productos.xlsx
-│       │   │   ├── Resultados/    # Archivos de resultados
-│       │   │   │   ├── obligacionesValorFinalSQL.xlsx
-│       │   │   │   ├── obligacionesResumenClientesSQL.xlsx
-│       │   │   │   ├── prueba_obligaciones_con_valor_final.xlsx
-│       │   │   │   ├── prueba_obligaciones_resumen_clientes.xlsx
-│       │   │── Resultados/    # Documentos PDF con los análisis descriptivos
-│       │   │   │   ├── Analisis descriptivo cobranza - Visualización.pdf
-│       │   │   │   ├── Resultados del Análisis Descriptivo.pdf
-│       ├── sql/                   # SQLs utilizados para la transformación de datos
-│       ├── config.json            # Configuración del proyecto
-│       ├── ejecucion.py           # Archivo de ejecución principal del proyecto
-│       ├── etl.py                 # Código para el proceso de ETL
-├── .gitignore                     # Archivos y carpetas ignorados por Git
-├── README.md                      # Documentación del proyecto
-├── setup.py                       # Archivo de configuración del paquete Python
-├── setup.cfg                      # Configuraciones adicionales del proyecto
-├── versioneer.py                  # Manejo de versiones del proyecto
-└── MANIFEST.in                    # Archivos a incluir en la distribución del proyecto
+![image](https://github.com/user-attachments/assets/6a742125-cb01-453e-aa40-100d91628989)
+
