@@ -1,2 +1,6 @@
-# respuestas-prueba-tecnica
-Repositorio para dejar los resultados de la prueba tecnica enviada
+# Prueba Técnica
+
+## Instrucciones
+1. Clona este repositorio
+2. Crea una carpeta con tu nombre o tu identificación y sube ahí tus respuestas.
+2. Realiza un pull request (PR) cuando hayas terminado.
