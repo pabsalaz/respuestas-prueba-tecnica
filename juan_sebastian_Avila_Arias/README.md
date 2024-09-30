@@ -31,6 +31,8 @@ Este proyecto está diseñado para realizar un proceso completo de **ETL** (Extr
 
 ### Resultados Generados
 
+En el archivo etl.py que se encuentra en la ruta src\vghu_prueba_tecnica_originacion_cobranza\etl.py se han generado 3 clases para toda la ETL solicitada:
+
 - `obligacionesValorFinalSQL.xlsx`: Archivo que contiene los resultados procesados con las tasas efectivas y valores finales de las obligaciones.
 - `obligacionesResumenClientesSQL.xlsx`: Resumen por cliente, mostrando la cantidad de productos y el valor final total de sus obligaciones.
 - `prueba_obligaciones_con_valor_final`: Archivo que contiene los resultados procesados con las tasas efectivas y valores finales de las obligaciones (Python).
@@ -40,6 +42,8 @@ Este proyecto está diseñado para realizar un proceso completo de **ETL** (Extr
 ### Documentos Adjuntos
 
 Se adjuntaron los siguientes documentos:
+
+Los resultados se guardaron en la ruta src\vghu_prueba_tecnica_originacion_cobranza\static\Excel\Resultados:
 
 - **`Analisis descriptivo cobranza - Visualización.pdf`**: Documento que presenta el análisis descriptivo realizado a través de las visualizaciones generadas en Power BI.
 - **`Resultados del Análisis Descriptivo.pdf`**: Documento que describe los resultados obtenidos tras el análisis de los datos de obligaciones y productos financieros.
