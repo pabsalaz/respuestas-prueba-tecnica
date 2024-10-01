@@ -1,0 +1,3 @@
+pandas
+sparky_bc
+openpyxl
